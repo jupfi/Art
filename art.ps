@@ -1,0 +1,75 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 0 0 595 447
+
+
+/maxY 1024.0 def
+/maxX 768.0 def
+
+
+/centerX maxX 2 div def
+/centerY maxY 2 div def
+/circleDegree 15 def
+/degreeOffset circleDegree 2 div def
+/circleRadius 5 def
+/circleIncRadius 3 def
+/numberOfCircles 20 def
+/circleDistance 34 def
+
+
+595.0 maxY div dup scale
+0 setgray
+
+/randNumber{
+     /ergebnis rand 100 mod 100 div def
+	 ergebnis
+}def
+
+
+/DeviceRGB setcolorspace
+
+
+0 centerY 40 div maxY{
+	/currentY exch def
+	0 centerX 40 div maxX{
+		
+		randNumber 0 1 setcolor
+		
+		/currentX exch def
+		currentX currentY moveto
+		currentY 1 lineto
+		currentY currentX lineto
+		closepath fill
+	}for
+
+}for
+
+
+circleDistance circleDistance circleDistance numberOfCircles mul {
+	/wert exch def
+	0 circleDegree 360{
+		/degree exch def
+	
+		/wertY wert degree degreeOffset add cos mul def
+		/wertX wert degree degreeOffset add  sin mul def
+		
+		
+		0 0  randNumber  setcolor
+		wertY centerY add wertX centerX add circleRadius 0 360 arc closepath fill
+		
+		}for
+	
+	/degreeOffset degreeOffset 10 add def
+	
+	/circleRadius circleRadius circleIncRadius add def
+}for
+
+
+centerY centerX translate
+0 .1 500{
+	0 0  0  setcolor
+	dup dup sqrt 4 div 0 360 arc fill 117 rotate
+}for
+
+
+showpage
+
